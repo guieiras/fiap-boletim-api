@@ -1,4 +1,5 @@
 require 'mechanize'
+class InvalidFIAPCredentials < StandardError; end
 
 class FIAPAgent
   attr_reader :agent, :rm, :password
@@ -15,6 +16,7 @@ class FIAPAgent
     login.senha = password
 
     agent.submit(login, login.buttons.first)
+    raise InvalidFIAPCredentials if agent.page.uri.to_s == "https://www2.fiap.com.br/Aluno/LogOn"
 
     boletim = agent.get("https://www2.fiap.com.br/Aluno/Boletim").search("table .i-boletim-table-row")
     boletim.map do |materia|
