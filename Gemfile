@@ -5,5 +5,5 @@ gem 'puma'
 gem 'sinatra'
 
 # Tools
-gem 'jbuilder'
+gem 'rabl'
 gem 'mechanize'

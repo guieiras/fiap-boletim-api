@@ -14,9 +14,6 @@ GEM
       domain_name (~> 0.5)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
-    jbuilder (2.7.0)
-      activesupport (>= 4.2.0)
-      multi_json (>= 1.2)
     mechanize (2.7.6)
       domain_name (~> 0.5, >= 0.5.1)
       http-cookie (~> 1.0)
@@ -31,7 +28,6 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
-    multi_json (1.13.1)
     mustermann (1.0.2)
     net-http-digest_auth (1.4.1)
     net-http-persistent (3.0.0)
@@ -40,6 +36,8 @@ GEM
       mini_portile2 (~> 2.3.0)
     ntlm-http (0.1.1)
     puma (3.11.4)
+    rabl (0.13.1)
+      activesupport (>= 2.3.14)
     rack (2.0.5)
     rack-protection (2.0.3)
       rack
@@ -61,9 +59,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  jbuilder
   mechanize
   puma
+  rabl
   sinatra
 
 BUNDLED WITH
