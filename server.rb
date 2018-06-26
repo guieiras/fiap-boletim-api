@@ -16,6 +16,10 @@ error InvalidFIAPCredentials do
 end
 
 post '/notas' do
-  @boletim = BoletimSerializer.(FIAPAgent.new(params["rm"], params["senha"]).boletim)
+  data = JSON.parse(request.body.read.to_s) rescue {}
+  rm = params["rm"] || data["rm"]
+  password = params["senha"] || data["senha"]
+
+  @boletim = BoletimSerializer.(FIAPAgent.new(rm, password).boletim)
   rabl :notas, format: "json"
 end
