@@ -1,5 +1,7 @@
 app:
   build: .
+  environment:
+    RACK_ENV: production
   ports:
     - "4567:4567"
   volumes:
