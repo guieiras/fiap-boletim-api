@@ -20,6 +20,7 @@ class FIAPAgent
     boletim.map do |materia|
       fields = materia.search("td")
       {
+        id: fields[0]["id"],
         disciplina: fields[0].text.strip,
         nac1: fields[1].text.strip,
         am1: fields[2].text.strip,

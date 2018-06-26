@@ -12,7 +12,7 @@ class BoletimSerializer
         value.empty? ? nil : value.to_f
       end
     end
-    [:aulas, :faltas1, :faltas2].each do |column|
+    [:id, :aulas, :faltas1, :faltas2].each do |column|
       data[column] = data[column].yield_self do |value|
         value = value.gsub(",", ".")
         value.empty? ? nil : value.to_i
