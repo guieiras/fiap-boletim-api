@@ -19,16 +19,24 @@ class FIAPAgent
     raise InvalidFIAPCredentials if agent.page.uri.to_s == "https://www2.fiap.com.br/Aluno/LogOn"
 
     boletim = agent.get("https://www2.fiap.com.br/Aluno/Boletim").search("table .i-boletim-table-row")
-    boletim.map do |materia|
+    notas = boletim.map do |materia|
       fields = materia.search("td")
+      id = fields[0]["id"]
+      nac_page = agent.get("https://www2.fiap.com.br/Boletim/Nacs?CodDisciplina=#{id}").search("table.i-boletim-table")
+      nacs = nac_page.map do |semestre|
+        semestre.search(".td-small:nth-child(4)").map { |col| col.text.strip }
+      end
+
       {
-        id: fields[0]["id"],
+        id: id,
         disciplina: fields[0].text.strip,
         nac1: fields[1].text.strip,
+        nacs1: (nacs[0] || []),
         am1: fields[2].text.strip,
         ps1: fields[3].text.strip,
         md1: fields[5].text.strip,
         nac2: fields[6].text.strip,
+        nacs2: (nacs[1] || []),
         am2: fields[7].text.strip,
         ps2: fields[8].text.strip,
         md2: fields[10].text.strip,
@@ -43,5 +51,4 @@ class FIAPAgent
       }
     end
   end
-
 end
