@@ -18,8 +18,12 @@ class BoletimSerializer
         value.empty? ? nil : value.to_i
       end
     end
+    [:nacs1, :nacs2].each do |column|
+      data[column] = data[column].map do |nac|
+        nac == '-' ? nil : nac.gsub(",", ".").to_f
+      end
+    end
 
     OpenStruct.new(data)
   end
-
 end
